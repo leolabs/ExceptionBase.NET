@@ -3,9 +3,9 @@
 log-*.php
 
 # Exclude private files
-PHP/application/config/database.php
+application/config/database.php
 
 # Exclude PhpStorm files
-PHP/.idea/
+.idea/
 
 
