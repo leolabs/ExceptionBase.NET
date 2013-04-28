@@ -1,5 +1,15 @@
+# Exclude temporary files
+.DS_Store
+log-*.php
+
+# Exclude private files
+application/config/database.php
+
+# Exclude PhpStorm files
+.idea/
+
+
 # Build and Object Folders
-bin/
 obj/
 
 #User Specific Files
