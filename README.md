@@ -7,5 +7,5 @@ For more information, visit [http://exceptionbase.net](http://exceptionbase.net)
 
 -----------------
 
-*License*
+##License
 This project is developed under the creative commons [by-nc-sa 3.0 license](http://creativecommons.org/licenses/by-nc-sa/3.0/), so you can fork end edit the files as you want as long as you don't remove the branding, "ExceptionBase.NET". You may also not use this product commercially without my permission.
