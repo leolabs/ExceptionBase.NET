@@ -127,7 +127,7 @@
                         $memFree = $permaException['MemoryFree'];
 
                         if ($memFree != -1) {
-                            echo round($memFree / 1024, 2) . " MB";
+                            echo round($memFree / 1024 / 1024, 2) . " MB";
                         } else {
                             echo "N/A";
                         }
@@ -151,7 +151,7 @@
                         $memTotal = $permaException['MemoryTotal'];
 
                         if ($memFree != -1) {
-                            echo round($memTotal / 1024, 2) . " MB";
+                            echo round($memTotal / 1024 / 1024, 2) . " MB";
                         } else {
                             echo "N/A";
                         }
@@ -174,19 +174,19 @@
     <pre><?php echo ($permaException['ExceptionInner'] != "") ? $permaException['ExceptionInner'] : "N/A"; ?></pre>
     <h3>Stack trace</h3>
     <pre><?php echo ($permaException['StackTrace'] != "") ? $permaException['StackTrace'] : "N/A"; ?></pre>
-    <?php if($custom['exception'][0]['MiscData'] != ""){ ?>
+    <?php if($permaException['MiscData'] != ""){ ?>
         <h3>Custom data</h3>
 
-        <?php switch($custom['exception'][0]['MiscDataType']){case "Image": ?>
-            <a href="<?php echo site_url('/content/image/' . $custom['exception'][0]['ID']); ?>" target="_blank">
-                <img src="<?php echo site_url('/content/image/' . $custom['exception'][0]['ID']); ?>" title="Custom image" />
+        <?php switch($permaException['MiscDataType']){case "Image": ?>
+            <a href="<?php echo site_url('/content/image/' . $permaException['ID']); ?>" target="_blank">
+                <img src="<?php echo site_url('/content/image/' . $permaException['ID']); ?>" title="Custom image" />
             </a>
             <?php break; case "Binary": ?>
-            <a class="btn btn-primary btn-large" target="_blank" href="<?php echo site_url('/content/binary/' . $custom['exception'][0]['ID']); ?>">Download Binary</a>
+            <a class="btn btn-primary btn-large" target="_blank" href="<?php echo site_url('/content/binary/' . $permaException['ID']); ?>">Download Binary</a>
             <?php break; case "Test": ?>
-            <pre><?php echo $custom['exception'][0]['MiscData']; ?></pre>
+            <pre><?php echo $permaException['MiscData']; ?></pre>
             <?php break; case "XML": case "JSON": ?>
-            <pre><?php echo htmlspecialchars($custom['exception'][0]['MiscData']); ?></pre>
+            <pre><?php echo htmlspecialchars($permaException['MiscData']); ?></pre>
             <?php break; ?>
         <?php } ?>
     <?php } ?>

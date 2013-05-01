@@ -131,7 +131,7 @@ function createSearchLinks($text){
                         $memFree = $custom['exception'][0]['MemoryFree'];
 
                         if ($memFree != -1) {
-                            echo round($memFree / 1024, 2) . " MB";
+                            echo round($memFree / 1024 / 1024, 2) . " MB";
                         } else {
                             echo "N/A";
                         }
@@ -155,7 +155,7 @@ function createSearchLinks($text){
                         $memTotal = $custom['exception'][0]['MemoryTotal'];
 
                         if ($memFree != -1) {
-                            echo round($memTotal / 1024, 2) . " MB";
+                            echo round($memTotal / 1024 / 1024, 2) . " MB";
                         } else {
                             echo "N/A";
                         }

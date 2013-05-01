@@ -133,7 +133,7 @@
 
                         foreach ($custom['exception']['MemoryFree'] as $mem) {
                             if ($mem != -1) {
-                                array_push($memFree, round($memFree / 1024, 2) . " MB");
+                                array_push($memFree, round($memFree / 1024 / 1024, 2) . " MB");
                             } else {
                                 array_push($memFree, "N/A");
                             }
@@ -160,7 +160,7 @@
 
                         foreach ($custom['exception']['MemoryTotal'] as $mem) {
                             if ($mem != -1) {
-                                array_push($memFree, round($memFree / 1024, 2) . " MB");
+                                array_push($memFree, round($memFree / 1024 / 1024, 2) . " MB");
                             } else {
                                 array_push($memFree, "N/A");
                             }
