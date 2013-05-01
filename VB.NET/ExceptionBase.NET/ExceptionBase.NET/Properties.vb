@@ -2,87 +2,99 @@
 
 Public Class Language
     ''' <summary>
-    ''' Der Titel des Benutzerfensters
+    ''' The UserDetails window's title
     ''' </summary>
-    Property winTitle As String = "Benutzerdetails zu dem Fehler"
+    Property winTitle As String = "Provide details to the exception"
 
     ''' <summary>
-    ''' Die Beschreibung im Benutzerfenster, neben 
+    ''' The description, next to your app's icon 
     ''' </summary>
-    Property winDescription As String = "Es ist ein schwerwiegender Fehler aufgetreten. Bitte beschreiben Sie die Schritte, die zu dem Fehler geführt haben könnten, damit wir ihn so schnell wie möglich beheben können."
+    Property winDescription As String = "A fatal error occured. Please describe the steps that could have lead to the error, so we can fix it as fast as possible."
 
     ''' <summary>
-    ''' Der Titel des Tabs, in den der Benutzer die Beschreibung eintragen kann.
+    ''' The title of the tab where the user can enter his description
     ''' </summary>
-    Property tabInputCaption As String = "Beschreibung des Fehlers"
+    Property tabInputCaption As String = "Error description"
 
     ''' <summary>
-    ''' Der Titel des Tabs, das erweiterte Informationen zu dem Fehler enthält
+    ''' The title of the tab that contains advanced error information
     ''' </summary>
-    Property tabDetailedInfoCaption As String = "Weitere Informationen"
+    Property tabDetailedInfoCaption As String = "Advanced information"
 
     ''' <summary>
-    ''' Die Beschriftung des Programmversion-Feldes
+    ''' The app version's title
     ''' </summary>
-    Property appVersionCaption As String = "Programmversion"
+    Property appVersionCaption As String = "App version"
 
     ''' <summary>
-    ''' Die Beschriftung des Framework-Feldes
+    ''' The framework's title
     ''' </summary>
     Property netVersionCaption As String = ".NET Framework"
 
     ''' <summary>
-    ''' Die Beschriftung des Betriebssystem-Feldes
+    ''' The OS's title
     ''' </summary>
-    Property osVersionCaption As String = "Betriebssystem"
+    Property osVersionCaption As String = "Operating system"
 
     ''' <summary>
-    ''' Die Beschriftung des Detailfeldes
+    ''' The ExceptionMessage's title
     ''' </summary>
-    Property errorDetailCaption As String = "Fehler-Details"
+    Property errorDetailCaption As String = "Error message"
 
     ''' <summary>
-    ''' Die Beschriftung des Überspringen-Buttons
+    ''' Tit skip button's title
     ''' </summary>
-    Property bSkip As String = "Ü&berspringen"
+    Property bSkip As String = "S&kip"
 
     ''' <summary>
-    ''' Die Beschriftung des OK-Buttons
+    ''' The send button's title
     ''' </summary>
-    Property bSend As String = "&OK"
+    Property bSend As String = "&Send"
 End Class
+
+''' <summary>
+''' You custom data's data type
+''' </summary>
+''' <remarks></remarks>
+Public Enum DataType
+    Text = 1
+    XML = 2
+    JSON = 3
+    Image = 4
+    Binary = 5
+End Enum
 
 Public Class Server
     ''' <summary>
-    ''' Die Adresse zur ExceptionBase.NET-API
+    ''' Your Exceptionbase.NET API URL
     ''' </summary>
-    ''' <remarks>z.B. http://meine.domain/api/addException.php, siehe Startseite im Webinterface</remarks>
+    ''' <remarks>e.g. http://my.domain/api/addException, see "System Settings" in your web interface</remarks>
     Property Server As String = ""
 
     ''' <summary>
-    ''' Die IP-Adresse, die zur Überprüfung der Internetverbindung gepingt werden soll.
+    ''' The IP Address that's used to check for an internet connection
     ''' </summary>
     Property PingIP As String = "8.8.8.8"
 End Class
 
 Public Class Application
     ''' <summary>
-    ''' Die Version Ihres Programmes
+    ''' Your app's version
     ''' </summary>
     Property Version As String = ""
 
     ''' <summary>
-    ''' Die ID Ihres Programmes in der Datenbank
+    ''' Your app's ID
     ''' </summary>
     Property ID As Integer = 0
 
     ''' <summary>
-    ''' Das Icon Ihres Programmes, wird im Benutzerfenster in der linken Ecke angezeigt.
+    ''' Your app's icon, will be shown on the UserDetails Form.
     ''' </summary>
     Property Icon As Drawing.Image
 
     ''' <summary>
-    ''' Soll im Benutzerfenster ein Tab mit weiteren Informationen zu dem Fehler angezeigt werden?
+    ''' Shall error details be shown to the user?
     ''' </summary>
     Property ShowErrorDetails As Boolean = True
 End Class
@@ -93,4 +105,15 @@ Public Class ExceptionInfo
     Property StackTrace As String = ""
     Property TargetSite As String = ""
     Property UserDescription As String = ""
+    Property CustomData As Byte() = System.Text.Encoding.Default.GetBytes("")
+    Property CustomDataType As DataType = DataType.Text
+End Class
+
+Public Class SystemInfo
+    Property NETFramework As String = System.Environment.Version.ToString()
+    Property InstalledOS As String = System.Environment.OSVersion.VersionString
+    Property ProcessorCount As Integer = Environment.ProcessorCount
+    Property Architecture As String = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE")
+    Property TotalMemory As ULong = My.Computer.Info.TotalPhysicalMemory
+    Property FreeMemory As ULong = My.Computer.Info.AvailablePhysicalMemory
 End Class

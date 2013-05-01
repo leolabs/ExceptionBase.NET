@@ -48,9 +48,9 @@ Partial Class MainForm
         Me.lblProjectDescription.Padding = New System.Windows.Forms.Padding(10)
         Me.lblProjectDescription.Size = New System.Drawing.Size(433, 59)
         Me.lblProjectDescription.TabIndex = 3
-        Me.lblProjectDescription.Text = "Dieses Programm testet die Fehlerbehandlung und das damit verbundene Fehlerfenste" & _
-    "r von ExceptionBase.NET. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Testseite: http://test.exceptionbase.net | Mehr Infos" & _
-    ": http://git.exceptionbase.net"
+        Me.lblProjectDescription.Text = "This app tests the error handling of ExceptionBase.NET, sending it to the databas" & _
+    "e and the UserDetails window. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Testsite: http://test.exceptionbase.net | More i" & _
+    "nformation: http://exceptionbase.net"
         '
         'pnlBlueLine
         '

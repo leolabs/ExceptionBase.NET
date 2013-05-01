@@ -1,50 +1,54 @@
 ﻿Option Strict On
 
+Imports System
+Imports System.Management
+
 Public Class ExceptionBase
-#Region "Variablen"
-    ' Form initialisieren
+#Region "Variables"
+    ' Initialize form
     Private UserDetails As New UserDetails()
 
-    ' Klassenvariablen für Fehlerdetails setzen
-    Dim NETFramework As String = ""
-    Dim InstalledOS As String = ""
-
-    ' Konstanten für 
-    Private Const NOTAVAILABLE = "Nicht verfügbar"
-    Private Const DESCSKIPPED = "Beschreibung übersprungen"
+    ' Some constants 
+    Private Const NOTAVAILABLE = "N/A"
+    Private Const DESCSKIPPED = "Skipped"
 #End Region
 
-#Region "Eigenschaften"
+#Region "Properties"
 
     ''' <summary>
-    ''' Die Beschriftungen im Benutzerfenster
+    ''' Localizable strings for the UserDetails form
     ''' </summary>
     Property Language As New Language()
 
     ''' <summary>
-    ''' Informationen zum Server
+    ''' Server information
     ''' </summary>
     Property Server As New Server()
 
     ''' <summary>
-    ''' Informationen zu Ihrem Programm
+    ''' Information of your app
     ''' </summary>
     Property Application As New Application()
 
     ''' <summary>
-    ''' Fehlerinformationen
+    ''' System information like the processor count, architecture, etc
+    ''' </summary>
+    Property SystemInfo As New SystemInfo()
+
+    ''' <summary>
+    ''' Exception details
     ''' </summary>
     Property Exception As New ExceptionInfo()
 #End Region
 
-#Region "Methoden"
+#Region "Methods"
     ''' <summary>
-    ''' Erstellt einen neuen Exception-Tracker, der Fehler an die ExceptionBase-Datenbank schicken kann.
+    ''' Creates a new ExceptionTracker that is able to gather and send information to an ExceptionBase.NET Server
     ''' </summary>
-    ''' <param name="Server">Die URL zum hinzufügen eines Fehlers zur Datenbank. Siehe Startseite im PHP-Interface</param>
-    ''' <param name="AppID">Die ID Ihrer App in der ExceptionBase.NET Datenbank</param>
-    ''' <param name="Version">Die Version des Programmes</param>
-    ''' <param name="AppIcon">Das Icon der App, wird im Detailfenster angezeigt</param>
+    ''' <param name="Server">The API's URL. Please check your System Settings page on the web interface for more information.</param>
+    ''' <param name="AppID">Your application's ID. Can be found under "Manage Applications" on the web interface</param>
+    ''' <param name="Version">Your application's version</param>
+    ''' <param name="AppIcon">Your application's icon, will be shown on the UserDetails form</param>
     Public Sub New(ByVal Server As String, ByVal AppID As Integer, ByVal Version As String, ByVal AppIcon As Drawing.Image)
         Me.Application.Version = Version
         Me.Application.ID = AppID
@@ -53,18 +57,17 @@ Public Class ExceptionBase
     End Sub
 
     ''' <summary>
-    ''' Sendet den gegebenen Fehler an die ExceptionBase.NET Datenbank und fragt, wenn nicht anders
-    ''' angegeben, den Nutzer vorher nach Informationen zu dem Fehler.
+    ''' Sends the given error to your ExceptionBase.NET database and, if AskUser is True, asks the user to describe the error
     ''' </summary>
-    ''' <param name="ex">Die Exception, die zur Datenbank gesendet werden soll.</param>
-    ''' <param name="AskUser">Soll der Benutzer selbst Informationen zu dem Fehler angeben können?</param>
-    ''' <param name="ThrowException">Soll eine Exception geworfen werden, wenn in der Methode ein Fehler auftritt?</param>
+    ''' <param name="ex">The Exception that will be sent to your ExceptionBase.NET database</param>
+    ''' <param name="AskUser">Shall the user be able to give his own information concerning this error?</param>
+    ''' <param name="ThrowException">Shall an Exception be thrown if something happens in this method?</param>
     Public Sub Track(ByVal ex As Exception, Optional ByVal AskUser As Boolean = True, Optional ByVal ThrowException As Boolean = False)
         Try
-            ' Informationen aus dem Fehler auslesen
+            ' Gather the needed information from the given Exception
             GatherInformation(ex)
 
-            ' Fehler Tracken
+            ' Track the Exception
             TrackCustom(AskUser)
         Catch exception As Exception
             If ThrowException Then Throw exception
@@ -72,52 +75,32 @@ Public Class ExceptionBase
     End Sub
 
     ''' <summary>
-    ''' Bezieht alle nötigen Informationen aus der Exception
+    ''' Gathers all the relevant information from a given error
     ''' </summary>
-    ''' <param name="ex">Die Exception aus der Fehlerinformationen bezogen werden sollen</param>
+    ''' <param name="ex">The error that information should be gathered from</param>
     ''' <remarks></remarks>
     Public Sub GatherInformation(Optional ByVal ex As Exception = Nothing)
-        ' .NET Framework und installiertes Betriebssystem auslesen
-        NETFramework = System.Environment.Version.ToString()
-        InstalledOS = System.Environment.OSVersion.VersionString
 
         If Not IsNothing(ex) Then
-            ' Message der Exception auslesen
-            If Not IsNothing(ex.Message) Then
-                Exception.Message = ex.Message
-            Else
-                Exception.Message = NOTAVAILABLE
-            End If
+            ' Get the Exception Message
+            Exception.Message = If(Not IsNothing(ex.Message), ex.Message, NOTAVAILABLE)
 
-            ' InnerException auslesen
-            If Not IsNothing(ex.InnerException) Then
-                Exception.Inner = ex.InnerException.ToString
-            Else
-                Exception.Inner = NOTAVAILABLE
-            End If
+            ' Get the InnerException's message
+            Exception.Message = If(Not IsNothing(ex.InnerException), ex.InnerException.ToString, NOTAVAILABLE)
 
-            ' StackTrace der Exception auslesen
-            If Not IsNothing(ex.StackTrace) Then
-                Exception.StackTrace = ex.StackTrace
-            Else
-                Exception.StackTrace = NOTAVAILABLE
-            End If
+            ' Get the stack trace
+            Exception.Message = If(Not IsNothing(ex.StackTrace), ex.StackTrace, NOTAVAILABLE)
 
-            ' Methode, die Exception ausgelöst hat, auslesen
-            If Not IsNothing(ex.TargetSite) Then
-                Exception.TargetSite = ex.TargetSite.ToString()
-            Else
-                Exception.TargetSite = NOTAVAILABLE
-            End If
+            ' Get the TargetSite
+            Exception.Message = If(Not IsNothing(ex.TargetSite), ex.TargetSite.ToString, NOTAVAILABLE)
         End If
     End Sub
 
     ''' <summary>
-    ''' Schickt den Fehler an den vorher angegebenen Server.
+    ''' Sends the error to your ExceptionBase.NET database.
     ''' </summary>
-    ''' <remarks></remarks>
     Public Sub Send()
-        ' Parameter für Server-Anfrage zusammensetzen
+        ' Combine the parameters for POST request
         Dim args As String = "em=" & Exception.Message & _
                              "&ei=" & Exception.Inner & _
                              "&st=" & Exception.StackTrace & _
@@ -125,10 +108,16 @@ Public Class ExceptionBase
                              "&udesc=" & Exception.UserDescription & _
                              "&appid=" & Application.ID & _
                              "&v=" & Application.Version & _
-                             "&net=" & NETFramework & _
-                             "&os=" & InstalledOS
+                             "&net=" & SystemInfo.NETFramework & _
+                             "&os=" & SystemInfo.InstalledOS & _
+                             "&arch=" & SystemInfo.Architecture & _
+                             "&cores=" & SystemInfo.ProcessorCount.ToString & _
+                             "&memfree=" & SystemInfo.FreeMemory.ToString & _
+                             "&memtotal=" & SystemInfo.TotalMemory.ToString & _
+                             "&misc=" & Exception.CustomData.ToString & _
+                             "&misctype=" & Exception.CustomDataType.ToString()
 
-        ' Prüfen, ob Computer eine Internetverbindung hat
+        ' Check if the computer has an internet connection
         If My.Computer.Network.Ping(Server.PingIP) Then
             If Functions.PostURL(Server.Server, args).Split(";"c)(0) = "1" Then
                 Debug.Print("[ExceptionBase Info] Sent error report to the database.")
@@ -139,12 +128,12 @@ Public Class ExceptionBase
     End Sub
 
     ''' <summary>
-    ''' Tracken eines selbst erstellten Fehlers, Informationen können in ExceptionInformation angepasst werden.
+    ''' Track your custom exception. You can define the values before using this method.
     ''' </summary>
-    ''' <param name="AskUser">Soll der Benutzer nach Informationen gefragt werden?</param>
+    ''' <param name="AskUser">Shell the user be asked to provide details about the exception?</param>
     Public Sub TrackCustom(Optional ByVal AskUser As Boolean = True)
         If AskUser Then
-            ' Sprache, Icon und Fehlerdetails in das Benutzerfenster übernehmen
+            ' Apply language, icon and other data to the window
             With UserDetails
                 .Language = Me.Language
 
@@ -157,13 +146,13 @@ Public Class ExceptionBase
                 .tcInformation.SelectTab(0)
                 .pbAppImage.Image = Application.Icon
                 .tbAppVersion.Text = Application.Version
-                .tbNetFramework.Text = NETFramework
-                .tbOperatingSystem.Text = InstalledOS
+                .tbNetFramework.Text = SystemInfo.NETFramework
+                .tbOperatingSystem.Text = SystemInfo.InstalledOS
                 .tbErrorDescription.Text = Exception.Message
                 .tbErrorInner.Text = Exception.Inner
             End With
 
-            ' Benutzerfenster als Dialog anzeigen
+            ' Show UserDetails Form as a dialog
             If UserDetails.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 Exception.UserDescription = UserDetails.tbUserDescription.Text
             Else
@@ -173,7 +162,7 @@ Public Class ExceptionBase
             Exception.UserDescription = NOTAVAILABLE
         End If
 
-        ' Fehler an die Datenbank senden
+        ' Send the error to your ExceptionBase.NET database
         Send()
     End Sub
 #End Region

@@ -22,7 +22,6 @@ Partial Class UserDetails
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UserDetails))
         Me.tlpImageAndDescription = New System.Windows.Forms.TableLayoutPanel()
         Me.pbAppImage = New System.Windows.Forms.PictureBox()
         Me.lblDescription = New System.Windows.Forms.Label()
@@ -98,7 +97,6 @@ Partial Class UserDetails
         Me.lblDescription.Padding = New System.Windows.Forms.Padding(10)
         Me.lblDescription.Size = New System.Drawing.Size(440, 64)
         Me.lblDescription.TabIndex = 1
-        Me.lblDescription.Text = resources.GetString("lblDescription.Text")
         Me.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'pnlControlButtons
