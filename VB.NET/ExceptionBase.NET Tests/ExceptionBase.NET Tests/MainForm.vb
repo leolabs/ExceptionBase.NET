@@ -37,6 +37,8 @@ Public Class MainForm
             .Message = "A custom exception!"
             .Inner = "These values can be customized as you want..."
             .UserDescription = InputBox("I can even create a custom user dialog, please enter your description.", "Error:", "Not entered")
+            .CustomData = My.Computer.FileSystem.ReadAllBytes("E:\image.png")
+            .CustomDataType = DataType.Image
         End With
 
         ' Send the error to the ExceptionBase.NET database

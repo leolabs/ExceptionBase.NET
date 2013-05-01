@@ -158,12 +158,13 @@ class ExceptionModel extends CI_Model
      * @param int $numCores
      * @param int $memoryFree
      * @param int $memoryTotal
-     * @param string $miscData
+     * @param mixed $miscData
+     * @param string $miscDataType
      * @return object the inserting result
      */
     public function addSingleException($appID, $appVersion, $exceptionMessage, $exceptionInner, $stackTrace,
                                        $errorMethod, $userDescription, $netFramework, $installedOS, $architecture,
-                                       $numCores, $memoryFree, $memoryTotal, $miscData)
+                                       $numCores, $memoryFree, $memoryTotal, $miscData, $miscDataType)
     {
         $insertData = array(
             'ExceptionMessage' => $exceptionMessage,
@@ -179,10 +180,11 @@ class ExceptionModel extends CI_Model
             'NumCores' => $numCores,
             'MemoryFree' => $memoryFree,
             'MemoryTotal' => $memoryTotal,
-            'MiscData' => $miscData
+            'MiscData' => $miscData,
+            'MiscDataType' => $miscDataType
         );
 
-        return $this->db->insert('exceptions', $insertData)->insert_id();
+        return $this->db->insert('exceptions', $insertData);
     }
 
     /**

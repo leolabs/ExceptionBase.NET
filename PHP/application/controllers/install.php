@@ -64,11 +64,12 @@ class Install extends CI_Controller {
                                   `Version` varchar(50) NOT NULL,
                                   `NETFramework` varchar(25) NOT NULL,
                                   `InstalledOS` varchar(100) NOT NULL,
-                                  `Architecture` varchar(4) NOT NULL DEFAULT 'N/A',
+                                  `Architecture` varchar(6) NOT NULL DEFAULT 'N/A',
                                   `NumCores` int(2) NOT NULL DEFAULT '-1',
                                   `MemoryFree` int(11) NOT NULL DEFAULT '-1',
                                   `MemoryTotal` int(11) NOT NULL DEFAULT '-1',
                                   `MiscData` blob,
+                                  `MiscDataType` enum('Text', 'XML', 'JSON', 'Image', 'Binary'),
                                   PRIMARY KEY (`ID`)
                                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;");
 

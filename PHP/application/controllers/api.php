@@ -44,10 +44,11 @@ class API extends Base_Controller
         $cores = ($_POST["cores"]); // NumCores
         $memfree = ($_POST["memfree"]); // MemoryFree
         $memtotal = ($_POST["memtotal"]); // MemoryTotal
-        $misc = ($_POST["misc"]);
+        $misc = ($_POST["misc"]); // Misc data
+        $misctype = ($_POST["misctype"]); // Misc data type
 
-        if(!isset($st) || !isset($appid) || $st == "" || $appid == ""){
-            echo "0;Fields missing";
+        if($appid == "" || !isset($appid)){
+            print_r($_POST);
             return;
         }
 
@@ -57,7 +58,7 @@ class API extends Base_Controller
 
         try{
             $this->exceptionmodel->addSingleException($appid, $v, $em, $ei, $st,
-                $eme, $udesc, $net, $os, $arch, $cores, $memfree, $memtotal, $misc);
+                $eme, $udesc, $net, $os, $arch, $cores, $memfree, $memtotal, base64_decode($misc), $misctype);
 
             echo "1";
         }catch(Exception $ex){

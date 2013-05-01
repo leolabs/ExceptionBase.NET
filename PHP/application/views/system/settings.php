@@ -8,11 +8,11 @@
     <div class="well">
         <h2>System Status</h2>
         <div class="row-fluid">
-            <div class="span4">
+            <div class="span2">
                 <table class="singleException table table-bordered ">
                     <thead>
                     <tr>
-                        <th>Database Size</th>
+                        <th>DB Size</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -25,7 +25,7 @@
                 </table>
             </div>
 
-            <div class="span4">
+            <div class="span2">
                 <table class="singleException table table-bordered ">
                     <thead>
                     <tr>
@@ -46,17 +46,34 @@
                 </table>
             </div>
 
-            <div class="span4">
+            <div class="span2">
                 <table class="singleException table table-bordered ">
                     <thead>
                     <tr>
-                        <th>Installed Build</th>
+                        <th>Build</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td><?php
                             echo EBN_VERSION;
+                            ?></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="span6">
+                <table class="singleException table table-bordered ">
+                    <thead>
+                    <tr>
+                        <th>API URL</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><?php
+                            echo site_url('/api/addException');
                             ?></td>
                     </tr>
                     </tbody>

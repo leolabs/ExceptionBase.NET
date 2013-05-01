@@ -30,7 +30,15 @@ class Login extends Base_Controller
 
             if ($userCheck[0]) {
                 $this->session->set_userdata('user', $userCheck[1][0]);
-                redirect('/');
+
+                $redirect = $this->session->userdata('redirect');
+                echo $redirect;
+
+                if($redirect){
+                    redirect($redirect);
+                }else{
+                    redirect('/');
+                }
             }else{
                 $this->load->view('login', array('tryAgain' => true));
             }

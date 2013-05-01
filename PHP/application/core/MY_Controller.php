@@ -123,7 +123,10 @@ class Base_Controller extends CI_Controller
             return true;
         } else {
             //If no session, redirect to login page
-            if($redirect) redirect('login', 'refresh');
+            if($redirect){
+                $this->session->set_userdata('redirect', uri_string());
+                redirect('login', 'refresh');
+            }
             return false;
         }
     }

@@ -34,7 +34,7 @@ class System extends Base_Controller{
         if ($query->num_rows() == 1) {
             $row = $query->row();
             $size = $row->db_size_mb;
-            return $size . ' MB';
+            return round($size, 2) . ' MB';
         } else {
             return "N/A";
         }
