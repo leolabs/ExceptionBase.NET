@@ -21,8 +21,49 @@
             <p>Do you really want to delete this exception? Please keep in mind that this action cannot be undone.</p>
         </div>
         <div class="modal-footer">
-            <a href="#" class="btn btn-danger">Yes</a>
+            <a href="#" class="btn btn-danger delbtn">Yes</a>
             <a href="#" class="btn closebtn">No</a>
+        </div>
+    </div>
+
+    <div class="modal hide fade" id="permaModal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Generated permalink</h3>
+        </div>
+        <div class="modal-body">
+            <p>Here's your permalink. You can give it to your friends, post it in a forum or do with it whatever you want.</p>
+            <pre></pre>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn closebtn">Thanks</a>
+        </div>
+    </div>
+
+    <div class="modal hide fade" id="embedModal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Embed this exception</h3>
+        </div>
+        <div class="modal-body">
+            <p>Here's your embed code. You can post it in a forum, on your website or do with it whatever you want.</p>
+            <pre></pre>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn closebtn">Thanks</a>
+        </div>
+    </div>
+
+    <div class="modal hide fade" id="unpublishModal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Unpublished exception</h3>
+        </div>
+        <div class="modal-body">
+            <p>Your exception is now unpublished. If you gave somebody the permalink or embedded the exception somewhere, it won't be accessible anymore.</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn closebtn">Thanks</a>
         </div>
     </div>
 
@@ -147,9 +188,44 @@
                     $("#deleteModal").modal("show");
                 });
 
+                $('#permaException').click(function(){
+                    $.ajax({
+                        type: "GET",
+                        "url": "<?php echo site_url('api/publishException/' . $custom["exception"][0]['ID']) ?>"
+                    }).done(function(msg){
+                        $("#permaModal pre").html("<?php echo site_url('perma/id/' . $custom["exception"][0]['ID']) ?>");
+                        $("#permaModal").modal("show");
+                    });
+                });
+
+                $('#embedException').click(function(){
+                    $.ajax({
+                        type: "GET",
+                        "url": "<?php echo site_url('api/publishException/' . $custom["exception"][0]['ID']) ?>"
+                    }).done(function(msg){
+                            $("#permaModal pre").text('<iframe src="<?php echo site_url('perma/id/' . $custom["exception"][0]['ID']) ?>" style="width: 100%; height: 500px"' +
+                                'scrolling="yes" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0">' +
+                                '</iframe>');
+                            $("#embedModal").modal("show");
+                        });
+                });
+
+                $('#unpublishException').click(function(){
+                    $.ajax({
+                        type: "GET",
+                        "url": "<?php echo site_url('api/unpublishException/' . $custom["exception"][0]['ID']) ?>"
+                    }).done(function(msg){
+                            $("#unpublishModal").modal("show");
+                        });
+                });
+
+                $('.delbtn').click(function(){
+                    document.location.href = "<?php echo site_url('/api/deleteException/' . $custom['exception'][0]['ID']); ?>";
+                });
+
                 $('.closebtn').click(function(){
                     $(this).parent().parent().modal("hide");
-                })
+                });
 
                 $(".close").click(function(e){
                     $('#loadFailAlert').fadeOut();

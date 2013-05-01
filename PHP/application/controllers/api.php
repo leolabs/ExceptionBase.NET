@@ -30,6 +30,39 @@ class API extends Base_Controller
         }
     }
 
+    public function deleteException($id = -1){
+        if($id == -1 || !$this->checkLogin()){
+            redirect('/');
+            return;
+        }
+
+        $exception = $this->exceptionmodel->getSingleException($id);
+        $appID = $exception[0]['App'];
+
+        $this->exceptionmodel->deleteExceptions(array('ID' => $id));
+
+        redirect('/applications/' . $appID);
+    }
+
+    public function publishException($id = -1){
+        $this->changeExceptionPerma($id, 1);
+    }
+
+    public function unpublishException($id = -1){
+        $this->changeExceptionPerma($id, 0);
+    }
+
+    private function changeExceptionPerma($id = -1, $published = 0){
+        if($id == -1 || !$this->checkLogin()){
+            redirect('/');
+            return;
+        }
+
+        $this->exceptionmodel->alterExceptions(array('ID' => $id), array('Public' => $published));
+
+        redirect('/exceptions/' . $id);
+    }
+
     public function addException(){
         $em = ($_POST["em"]); // ExceptionMessage
         $ei = ($_POST["ei"]); // ExceptionInner (Message)
