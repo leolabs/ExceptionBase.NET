@@ -1,0 +1,44 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+ExceptionBase.NETTests
+</name>
+</assembly>
+<members>
+<member name="M:ExceptionBase.NET_Tests.MainForm.testDoubleToString(System.Object,System.EventArgs)">
+	<summary>
+ Tries to create an integer with the value "Hello world!" and catches the exception
+ </summary>
+</member><member name="M:ExceptionBase.NET_Tests.MainForm.textNonexistentFile(System.Object,System.EventArgs)">
+	<summary>
+ Tries reading a non-existent file and catchjes the exception
+ </summary>
+</member><member name="M:ExceptionBase.NET_Tests.MainForm.sendCustomError(System.Object,System.EventArgs)">
+	<summary>
+ Sends a custom error to the database. Everything can be customized before sending the error
+ </summary>
+</member><member name="M:ExceptionBase.NET_Tests.MainForm.validateServerAdress(System.Object,System.EventArgs)">
+	<summary>
+ Checks the Server address for it's correctness and enables/disables the buttons
+ </summary>
+</member><member name="P:ExceptionBase.NET_Tests.My.Resources.Resources.ResourceManager">
+	<summary>
+  Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+</summary>
+</member><member name="P:ExceptionBase.NET_Tests.My.Resources.Resources.Culture">
+	<summary>
+  Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+  Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+</summary>
+</member><member name="P:ExceptionBase.NET_Tests.My.Resources.Resources.bug">
+	<summary>
+  Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+</summary>
+</member><member name="T:ExceptionBase.NET_Tests.My.Resources.Resources">
+	<summary>
+  Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+</summary>
+</member>
+</members>
+</doc>
