@@ -67,7 +67,7 @@ Partial Class MainForm
         Me.btnDoubleToStringError.Name = "btnDoubleToStringError"
         Me.btnDoubleToStringError.Size = New System.Drawing.Size(409, 35)
         Me.btnDoubleToStringError.TabIndex = 5
-        Me.btnDoubleToStringError.Text = "Fehler auslösen (String zu Double konvertieren)"
+        Me.btnDoubleToStringError.Text = "Trigger exception (Convert String to Double)"
         Me.btnDoubleToStringError.UseVisualStyleBackColor = True
         '
         'btnNonexistentFileError
@@ -76,7 +76,7 @@ Partial Class MainForm
         Me.btnNonexistentFileError.Name = "btnNonexistentFileError"
         Me.btnNonexistentFileError.Size = New System.Drawing.Size(409, 33)
         Me.btnNonexistentFileError.TabIndex = 6
-        Me.btnNonexistentFileError.Text = "Fehler auslösen (Nicht existierende Datei öffnen)"
+        Me.btnNonexistentFileError.Text = "Trigger exception (Open nonexistent file)"
         Me.btnNonexistentFileError.UseVisualStyleBackColor = True
         '
         'gbServerAddress
@@ -87,7 +87,7 @@ Partial Class MainForm
         Me.gbServerAddress.Size = New System.Drawing.Size(350, 40)
         Me.gbServerAddress.TabIndex = 7
         Me.gbServerAddress.TabStop = False
-        Me.gbServerAddress.Text = "Adresse der Datenbank-API"
+        Me.gbServerAddress.Text = "Your database API"
         '
         'tbDatabaseAdress
         '
@@ -123,7 +123,7 @@ Partial Class MainForm
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(409, 33)
         Me.Button1.TabIndex = 9
-        Me.Button1.Text = "Eigenen Fehler erstellen und an die Datenbank schicken"
+        Me.Button1.Text = "Create custom error and send to database"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'MainForm
