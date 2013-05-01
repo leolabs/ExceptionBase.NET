@@ -1,7 +1,6 @@
 ﻿Option Strict On
 
-Imports System
-Imports System.Management
+Imports System.Collections.Specialized
 
 Public Class ExceptionBase
 #Region "Variables"
@@ -101,25 +100,28 @@ Public Class ExceptionBase
     ''' </summary>
     Public Sub Send()
         ' Combine the parameters for POST request
-        Dim args As String = "em=" & Exception.Message & _
-                             "&ei=" & Exception.Inner & _
-                             "&st=" & Exception.StackTrace & _
-                             "&eme=" & Exception.TargetSite & _
-                             "&udesc=" & Exception.UserDescription & _
-                             "&appid=" & Application.ID & _
-                             "&v=" & Application.Version & _
-                             "&net=" & SystemInfo.NETFramework & _
-                             "&os=" & SystemInfo.InstalledOS & _
-                             "&arch=" & SystemInfo.Architecture & _
-                             "&cores=" & SystemInfo.ProcessorCount.ToString & _
-                             "&memfree=" & SystemInfo.FreeMemory.ToString & _
-                             "&memtotal=" & SystemInfo.TotalMemory.ToString & _
-                             "&misc=" & Exception.CustomData.ToString & _
-                             "&misctype=" & Exception.CustomDataType.ToString()
+
+        Dim NVC As New NameValueCollection()
+
+        NVC.Add("em", Exception.Message)
+        NVC.Add("ei", Exception.Inner)
+        NVC.Add("st", Exception.StackTrace)
+        NVC.Add("eme", Exception.TargetSite)
+        NVC.Add("udesc", Exception.UserDescription)
+        NVC.Add("appid", Application.ID.ToString)
+        NVC.Add("v", Application.Version)
+        NVC.Add("net", SystemInfo.NETFramework)
+        NVC.Add("os", SystemInfo.InstalledOS)
+        NVC.Add("arch", SystemInfo.Architecture)
+        NVC.Add("cores", SystemInfo.ProcessorCount.ToString)
+        NVC.Add("memfree", SystemInfo.FreeMemory.ToString)
+        NVC.Add("memtotal", SystemInfo.TotalMemory.ToString)
+        NVC.Add("misc", System.Convert.ToBase64String(Exception.CustomData))
+        NVC.Add("misctype", Exception.CustomDataType.ToString)
 
         ' Check if the computer has an internet connection
         If My.Computer.Network.Ping(Server.PingIP) Then
-            If Functions.PostURL(Server.Server, args).Split(";"c)(0) = "1" Then
+            If Functions.PostURL(Server.Server, NVC).Split(";"c)(0) = "1" Then
                 Debug.Print("[ExceptionBase Info] Sent error report to the database.")
             Else
                 Debug.Print("[ExceptionBase Info] Error while sending error to the database.")

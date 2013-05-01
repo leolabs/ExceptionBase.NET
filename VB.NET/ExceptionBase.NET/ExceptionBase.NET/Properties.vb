@@ -114,6 +114,6 @@ Public Class SystemInfo
     Property InstalledOS As String = System.Environment.OSVersion.VersionString
     Property ProcessorCount As Integer = Environment.ProcessorCount
     Property Architecture As String = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE")
-    Property TotalMemory As ULong = My.Computer.Info.TotalPhysicalMemory
-    Property FreeMemory As ULong = My.Computer.Info.AvailablePhysicalMemory
+    Property TotalMemory As ULong = My.Computer.Info.TotalVirtualMemory
+    Property FreeMemory As ULong = My.Computer.Info.AvailableVirtualMemory
 End Class

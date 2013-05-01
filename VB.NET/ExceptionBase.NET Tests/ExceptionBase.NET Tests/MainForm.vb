@@ -32,17 +32,12 @@ Public Class MainForm
         ' Gather the needed information first.
         ExBase.GatherInformation()
 
-        ' Add an image to the exception, you can add every type of content here
-        Dim ImageStream As New IO.MemoryStream
-        My.Resources.bug.Save(ImageStream, System.Drawing.Imaging.ImageFormat.Png)
-        ImageStream.Flush()
-
         ' Customize the data as you like
         With ExBase.Exception
             .Message = "A custom exception!"
             .Inner = "These values can be customized as you want..."
             .UserDescription = InputBox("I can even create a custom user dialog, please enter your description:", "Error:", "Not entered")
-            .CustomData = ImageStream.ToArray()
+            .CustomData = My.Computer.FileSystem.ReadAllBytes("E:\image.png")
             .CustomDataType = DataType.Image
         End With
 
