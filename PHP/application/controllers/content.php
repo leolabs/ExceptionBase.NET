@@ -9,12 +9,18 @@ class Content extends Base_Controller {
     }
 
     public function image($id = -1){
-        if($id == -1 || !$this->checkLogin()){
+        $exception = $this->exceptionmodel->getSingleException($id);
+
+        if($id == -1){
             redirect('/');
             return;
         }
 
-        $exception = $this->exceptionmodel->getSingleException($id);
+        if(!$this->checkLogin(false)){
+            if($exception[0]["Public"] == 0){
+                $this->checkLogin();
+            }
+        }
 
         if(count($exception) == 0){
             redirect('/');
@@ -29,12 +35,18 @@ class Content extends Base_Controller {
     }
 
     public function binary($id = -1){
-        if($id == -1 || !$this->checkLogin()){
+        if($id == -1){
             redirect('/');
             return;
         }
 
         $exception = $this->exceptionmodel->getSingleException($id);
+
+        if(!$this->checkLogin(false)){
+            if($exception[0]["Public"] == 0){
+                $this->checkLogin();
+            }
+        }
 
         if(count($exception) == 0){
             redirect('/');
