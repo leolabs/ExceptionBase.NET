@@ -1,7 +1,7 @@
 <?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 // ExceptionBase.NET Build and Version
-define('EBN_VERSION', 20130501.1);
+define('EBN_VERSION', 20130501.2);
 
 /*
 |--------------------------------------------------------------------------
