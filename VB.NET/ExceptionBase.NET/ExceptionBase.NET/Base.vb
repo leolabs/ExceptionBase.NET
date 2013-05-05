@@ -1,4 +1,4 @@
-﻿Option Strict On
+Option Strict On
 
 Imports System.Collections.Specialized
 
@@ -48,7 +48,7 @@ Public Class ExceptionBase
     ''' <param name="AppID">Your application's ID. Can be found under "Manage Applications" on the web interface</param>
     ''' <param name="Version">Your application's version</param>
     ''' <param name="AppIcon">Your application's icon, will be shown on the UserDetails form</param>
-    Public Sub New(ByVal Server As String, ByVal AppID As Integer, ByVal Version As String, ByVal AppIcon As Drawing.Image)
+    Public Sub New(ByVal Server As String, ByVal AppID As Integer, ByVal Version As String, ByVal Optional AppIcon As Drawing.Image = Nothing)
         Me.Application.Version = Version
         Me.Application.ID = AppID
         Me.Server.Server = Server
