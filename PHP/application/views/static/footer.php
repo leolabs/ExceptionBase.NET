@@ -1,7 +1,7 @@
 <hr style="clear: both;">
 
 <footer>
-    <p class="pull-left">&copy; <a href="http://leolabs.org">leolabs.org</a> 2012-<?php echo date("Y"); ?></p>
+    <p class="pull-left">&copy; <a href="http://leolabs.org" target="_blank">leolabs.org</a> 2012-<?php echo date("Y"); ?></p>
 
     <p class="pull-right"><a href="http://exceptionbase.net/manual/" target="_blank">Documentation and Manual</a></p>
 </footer>
