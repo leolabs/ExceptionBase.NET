@@ -99,9 +99,9 @@ class Install extends CI_Controller {
             $dbpass = $_POST['pass'];
 
             if(!isset($dbhost) || !isset($dbname) || !isset($dbuser) || !isset($dbpass) ||
-                $dbhost == "" || $dbname == "" || $dbuser == "" || $dbpass == "")
+                $dbhost == "" || $dbname == "" || $dbuser == "")
             {
-                print_r($_POST);
+                redirect('/install/#10');
                 return;
             }
 

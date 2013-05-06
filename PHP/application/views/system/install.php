@@ -169,12 +169,12 @@
                     <div class="row-fluid">
                         <div class="span6 control-group" style="margin-bottom: 0">
                             <label for="databaseUser">Username:</label>
-                            <input type="text" class="input-block-level" id="userName" name="user" placeholder="Your database user">
+                            <input type="text" class="input-block-level" id="userName" name="user" placeholder="Your username">
                         </div>
 
                         <div class="span6 control-group" style="margin-bottom: 0">
                             <label for="databasePass">E-mail address:</label>
-                            <input type="email" class="input-block-level" id="userMail" name="mail" placeholder="Your password">
+                            <input type="email" class="input-block-level" id="userMail" name="mail" placeholder="Your E-mail address">
                         </div>
                     </div>
 
@@ -274,7 +274,7 @@
                             pass: $('#userPass').val(), repass: $('#userRePass').val()}
                     }).done(function(msg){
                         if(msg == "1"){
-                            $("#userSuccess").fadeIn();
+                            $("#userSuccess").slideDown();
                             $("#userForm").slideUp();
                             $("#setupUser").html("Log in &raquo;");
                             userCreated = true;
