@@ -7,7 +7,7 @@
 <hr>
 
 <div class="footer">
-    <p>&copy; leolabs.org 2012-<?php echo date('Y') ?></p>
+    <p>Developed by <a href="http://leolabs.org" target="_blank">leolabs.org</a></p>
 </div>
 
 </div> <!-- /container -->
