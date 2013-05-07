@@ -19,7 +19,7 @@
         </p>
     <?php } elseif (count($applist) == 0 && $user['UserLevel'] < 2) { ?>
         <p>
-            Welcome to ExceptionBase.NET! You don't seem to have any application registered yet but bou don't have the
+            Welcome to ExceptionBase.NET! You don't seem to have any application registered yet but you don't have the
             permissions to register an application, so please ask an administrator to do it for you. Anyway, you
             can start by reading the <a href="http://exceptionbase.net/manual/">ExceptionBase.NET manual</a>.
         </p>
