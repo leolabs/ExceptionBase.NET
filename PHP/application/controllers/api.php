@@ -63,30 +63,45 @@ class API extends Base_Controller
         redirect('/exceptions/' . $id);
     }
 
+    /**
+     * @param string $param
+     * @param string $default
+     *
+     * @return string the result
+     */
+    private function checkPostData($param, $default = ""){
+        if(isset($_POST[$param])){
+            return $_POST[$param];
+        }else{
+            return $default;
+        }
+    }
+
     public function addException(){
-        $em = ($_POST["em"]); // ExceptionMessage
-        $ei = ($_POST["ei"]); // ExceptionInner (Message)
-        $st = ($_POST["st"]); // StackTrace
-        $eme = ($_POST["eme"]); // ErrorMethod
-        $udesc = ($_POST["udesc"]); // UserDescription
-        $appid = ($_POST["appid"]); // AppID
-        $v = ($_POST["v"]); // Version
-        $net = ($_POST["net"]); // NETFramework
-        $os = ($_POST["os"]); // InstalledOS
-        $arch = ($_POST["arch"]); // Architecture
-        $cores = ($_POST["cores"]); // NumCores
-        $memfree = ($_POST["memfree"]); // MemoryFree
-        $memtotal = ($_POST["memtotal"]); // MemoryTotal
-        $misc = ($_POST["misc"]); // Misc data
-        $misctype = ($_POST["misctype"]); // Misc data type
+        $em = ($this->checkPostData("em")); // ExceptionMessage
+        $ei = ($this->checkPostData("ei")); // ExceptionInner (Message)
+        $st = ($this->checkPostData("st")); // StackTrace
+        $eme = ($this->checkPostData("eme")); // ErrorMethod
+        $udesc = ($this->checkPostData("udesc")); // UserDescription
+        $appid = ($this->checkPostData("appid")); // AppID
+        $v = ($this->checkPostData("v")); // Version
+        $net = ($this->checkPostData("net")); // NETFramework
+        $os = ($this->checkPostData("os")); // InstalledOS
+        $arch = ($this->checkPostData("arch")); // Architecture
+        $cores = ($this->checkPostData("cores")); // NumCores
+        $memfree = ($this->checkPostData("memfree")); // MemoryFree
+        $memtotal = ($this->checkPostData("memtotal")); // MemoryTotal
+        $misc = ($this->checkPostData("misc")); // Misc data
+        $misctype = ($this->checkPostData("misctype")); // Misc data type
 
         if($appid == "" || !isset($appid)){
-            print_r($_POST);
+            echo "0;AppID not set";
             return;
         }
 
         if(count($this->applicationmodel->getSingleApplication($appid)) == 0){
             echo "0;App isn't registered";
+            return;
         }
 
         try{
