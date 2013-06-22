@@ -85,13 +85,13 @@ Public Class ExceptionBase
             Exception.Message = If(Not IsNothing(ex.Message), ex.Message, NOTAVAILABLE)
 
             ' Get the InnerException's message
-            Exception.Message = If(Not IsNothing(ex.InnerException), ex.InnerException.ToString, NOTAVAILABLE)
+            Exception.Inner = If(Not IsNothing(ex.InnerException), ex.InnerException.ToString, NOTAVAILABLE)
 
             ' Get the stack trace
-            Exception.Message = If(Not IsNothing(ex.StackTrace), ex.StackTrace, NOTAVAILABLE)
+            Exception.StackTrace = If(Not IsNothing(ex.StackTrace), ex.StackTrace, NOTAVAILABLE)
 
             ' Get the TargetSite
-            Exception.Message = If(Not IsNothing(ex.TargetSite), ex.TargetSite.ToString, NOTAVAILABLE)
+            Exception.TargetSite = If(Not IsNothing(ex.TargetSite), ex.TargetSite.ToString, NOTAVAILABLE)
         End If
     End Sub
 
