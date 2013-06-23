@@ -79,7 +79,6 @@ Public Class ExceptionBase
     ''' <param name="ex">The error that information should be gathered from</param>
     ''' <remarks></remarks>
     Public Sub GatherInformation(Optional ByVal ex As Exception = Nothing)
-
         If Not IsNothing(ex) Then
             ' Get the Exception Message
             Exception.Message = If(Not IsNothing(ex.Message), ex.Message, NOTAVAILABLE)
@@ -101,23 +100,23 @@ Public Class ExceptionBase
     Public Sub Send()
         ' Combine the parameters for POST request
 
-        Dim NVC As New NameValueCollection()
-
-        NVC.Add("em", Exception.Message)
-        NVC.Add("ei", Exception.Inner)
-        NVC.Add("st", Exception.StackTrace)
-        NVC.Add("eme", Exception.TargetSite)
-        NVC.Add("udesc", Exception.UserDescription)
-        NVC.Add("appid", Application.ID.ToString)
-        NVC.Add("v", Application.Version)
-        NVC.Add("net", SystemInfo.NETFramework)
-        NVC.Add("os", SystemInfo.InstalledOS)
-        NVC.Add("arch", SystemInfo.Architecture)
-        NVC.Add("cores", SystemInfo.ProcessorCount.ToString)
-        NVC.Add("memfree", SystemInfo.FreeMemory.ToString)
-        NVC.Add("memtotal", SystemInfo.TotalMemory.ToString)
-        NVC.Add("misc", System.Convert.ToBase64String(Exception.CustomData))
-        NVC.Add("misctype", Exception.CustomDataType.ToString)
+        Dim NVC As New NameValueCollection() From
+        {
+            { "em", Exception.Message }
+            { "ei", Exception.Inner }
+            { "st", Exception.StackTrace }
+            { "eme", Exception.TargetSite }
+            { "udesc", Exception.UserDescription }
+            { "appid", Application.ID.ToString }
+            { "v", Application.Version }
+            { "os", SystemInfo.InstalledOS }
+            { "arch", SystemInfo.Architecture }
+            { "cores", SystemInfo.ProcessorCount.ToString }
+            { "memfree", SystemInfo.FreeMemory.ToString }
+            { "memtotal", SystemInfo.TotalMemory.ToString }
+            { "misc", System.Convert.ToBase64String(Exception.CustomData) }
+            { "misctype", Exception.CustomDataType.ToString }
+        }
 
         ' Check if the computer has an internet connection
         If My.Computer.Network.Ping(Server.PingIP) Then
