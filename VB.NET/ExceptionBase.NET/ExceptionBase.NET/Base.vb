@@ -102,20 +102,20 @@ Public Class ExceptionBase
 
         Dim NVC As New NameValueCollection() From
         {
-            { "em", Exception.Message }
-            { "ei", Exception.Inner }
-            { "st", Exception.StackTrace }
-            { "eme", Exception.TargetSite }
-            { "udesc", Exception.UserDescription }
-            { "appid", Application.ID.ToString }
-            { "v", Application.Version }
-            { "os", SystemInfo.InstalledOS }
-            { "arch", SystemInfo.Architecture }
-            { "cores", SystemInfo.ProcessorCount.ToString }
-            { "memfree", SystemInfo.FreeMemory.ToString }
-            { "memtotal", SystemInfo.TotalMemory.ToString }
-            { "misc", System.Convert.ToBase64String(Exception.CustomData) }
-            { "misctype", Exception.CustomDataType.ToString }
+            {"em", Exception.Message},
+            {"ei", Exception.Inner},
+            {"st", Exception.StackTrace},
+            {"eme", Exception.TargetSite},
+            {"udesc", Exception.UserDescription},
+            {"appid", Application.ID.ToString},
+            {"v", Application.Version},
+            {"os", SystemInfo.InstalledOS},
+            {"arch", SystemInfo.Architecture},
+            {"cores", SystemInfo.ProcessorCount.ToString},
+            {"memfree", SystemInfo.FreeMemory.ToString},
+            {"memtotal", SystemInfo.TotalMemory.ToString},
+            {"misc", System.Convert.ToBase64String(Exception.CustomData)},
+            {"misctype", Exception.CustomDataType.ToString}
         }
 
         ' Check if the computer has an internet connection
