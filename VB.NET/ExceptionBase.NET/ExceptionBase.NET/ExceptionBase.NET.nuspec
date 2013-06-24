@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>2013.6.22.2</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://creativecommons.org/licenses/by-nc-sa/3.0/</licenseUrl>
+    <projectUrl>http://exceptionbase.net</projectUrl>
+    <iconUrl>http://leolabs.org/wp-content/uploads/2013/05/exceptionbase-icon.jpg</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>ExceptionBase.NET will catch exceptions that may occur in your app and send them to a clearly arranged online interface where you can manage them and view every detail, from the used operating system down to the stack trace. This will allow you to find bugs in your app easier and more quickly.</description>
+    <releaseNotes>Bugfixes</releaseNotes>
+    <copyright>Copyright 2013 Leo Bernard</copyright>
+    <tags>exception tracking tracker error</tags>
+  </metadata>
+</package>
