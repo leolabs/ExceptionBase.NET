@@ -113,6 +113,12 @@ class API extends Base_Controller
             echo "0;" . $ex->getMessage();
         }
     }
+	
+	public function removeException() {
+		$id = ($this->checkPostData("id"));
+		$salt = ($this->check
+		
+	}
 
     public function changeUserdata()
     {
